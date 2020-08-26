@@ -1,5 +1,6 @@
 package cn.rxwycdh.websocket.constant;
 
+import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.http.websocketx.WebSocketServerHandshaker;
 
 import java.util.Map;
@@ -11,6 +12,13 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public interface ChatConstant {
 
-    Map<String, WebSocketServerHandshaker> webSocketHandshakerMap = new ConcurrentHashMap<String, WebSocketServerHandshaker>();
+    /**
+     * 用channelId为键，存放握手实例。用来响应CloseWebSocketFrame的请求
+     */
+    Map<String, WebSocketServerHandshaker> WEBSOCKET_HANDSHAKER_MAP = new ConcurrentHashMap<>();
 
+    /**
+     * 用userId为键，存放在线的客户端连接上下文
+     */
+    Map<Long, ChannelHandlerContext> ONLINE_USER_MAP = new ConcurrentHashMap<>();
 }

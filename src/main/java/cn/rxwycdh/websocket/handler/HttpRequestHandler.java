@@ -15,7 +15,7 @@ import io.netty.handler.codec.http.websocketx.WebSocketServerHandshakerFactory;
 import io.netty.util.CharsetUtil;
 import org.springframework.stereotype.Component;
 
-import static cn.rxwycdh.websocket.constant.ChatConstant.webSocketHandshakerMap;
+import static cn.rxwycdh.websocket.constant.ChatConstant.WEBSOCKET_HANDSHAKER_MAP;
 
 /**
  * @author ChenDehua  597701764@qq.com
@@ -65,7 +65,7 @@ public class HttpRequestHandler extends SimpleChannelInboundHandler<Object> {
                 "ws:/" + ctx.channel() + "/websocket", null, false);
         WebSocketServerHandshaker handshaker = wsFactory.newHandshaker(req);
 
-        webSocketHandshakerMap.put(ctx.channel().id().asLongText(), handshaker);
+        WEBSOCKET_HANDSHAKER_MAP.put(ctx.channel().id().asLongText(), handshaker);
 
         if (handshaker == null) {
             WebSocketServerHandshakerFactory.sendUnsupportedVersionResponse(ctx.channel());
